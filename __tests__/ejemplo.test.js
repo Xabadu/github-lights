@@ -1,3 +1,3 @@
 test('Este test es de prueba', () => {
-  expect(1).toBe(12);
+  expect(1).toBe(1);
 })
