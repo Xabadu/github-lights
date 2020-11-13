@@ -65,6 +65,10 @@ fastify.post('/pr', async (request, reply) => {
   } else { // cerraron el PR
     updateLight(COLORS.PURPLE);
   }
+})
+
+fastify.post('/build', async (request, reply) => {
+  console.log(request.body);
   // const actionColor = request.body.action === 'created' ? COLORS.HOT_PINK : COLORS.BLUE;
   // updateLight(actionColor);
 })
