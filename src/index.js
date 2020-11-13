@@ -14,7 +14,11 @@ const Color = require('color')
 
 const COLORS = {
   BLUE: 'rgb(35, 32, 189)',
-  HOT_PINK: 'rgb(255, 105, 180)'
+  GREEN: 'rgb(16, 230, 77)',
+  HOT_PINK: 'rgb(255, 105, 180)',
+  PURPLE: 'rgb(137, 16, 230)',
+  TOMATO: 'rgb(255,99,71)',
+  YELLOW: 'rgb(230, 230, 16)'
 };
 
 fastify.get('/', async (request, reply) => {
@@ -56,7 +60,11 @@ fastify.post('/stars', async (request, reply) => {
 })
 
 fastify.post('/pr', async (request, reply) => {
-  console.log('body', request.body);
+  if (['opened', 'reopened'].includes(request.body.action)) {
+    updateLight(COLORS.YELLOW);
+  } else { // cerraron el PR
+    updateLight(COLORS.PURPLE);
+  }
   // const actionColor = request.body.action === 'created' ? COLORS.HOT_PINK : COLORS.BLUE;
   // updateLight(actionColor);
 })
