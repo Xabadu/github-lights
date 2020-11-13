@@ -57,6 +57,7 @@ const updateLight = (actionColor) => {
 fastify.post('/stars', async (request, reply) => {
   const actionColor = request.body.action === 'created' ? COLORS.HOT_PINK : COLORS.BLUE;
   updateLight(actionColor);
+  return { status: 'OK' }
 })
 
 fastify.post('/pr', async (request, reply) => {
@@ -65,8 +66,20 @@ fastify.post('/pr', async (request, reply) => {
   } else { // cerraron el PR
     updateLight(COLORS.PURPLE);
   }
-  // const actionColor = request.body.action === 'created' ? COLORS.HOT_PINK : COLORS.BLUE;
-  // updateLight(actionColor);
+  return { status: 'OK' }
+})
+
+fastify.post('/build', async (request, reply) => {
+  console.log(request.body);
+  if (request.body.state === 'pending') {
+    updateLight(COLORS.YELLOW);
+  } else if (request.body.state === 'failure') {
+    updateLight(COLORS.TOMATO);
+  } else if (request.body.state === 'success') {
+    updateLight(COLORS.GREEN);
+  } else {
+    return { status: 'INVALID' }
+  }
 })
 
 const start = async () => {
