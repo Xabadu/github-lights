@@ -69,8 +69,13 @@ fastify.post('/pr', async (request, reply) => {
 
 fastify.post('/build', async (request, reply) => {
   console.log(request.body);
-  // const actionColor = request.body.action === 'created' ? COLORS.HOT_PINK : COLORS.BLUE;
-  // updateLight(actionColor);
+  if (request.body.state === 'pending') {
+    updateLight(COLORS.YELLOW);
+  } else if (request.body.state === 'failure') {
+    updateLight(COLORS.TOMATO);
+  } else {
+    // noop
+  }
 })
 
 const start = async () => {
